@@ -12,11 +12,12 @@ function setup() {
   walker = new Walker();
 }
 
+window.addEventListener("mousemove", () => {
+  dwell = millis();
+});
+
 function draw() {
-  if (pmouseX != mouseX || pmouseY != pmouseY) {
-    dwell = millis();
-    background(255, 255, 255, 80);
-  } else if ((millis() - dwell) < 5000) {
+  if (millis() - dwell < 5000) {
     background(255, 255, 255, 80);
   } else {
     walker.bounce();
