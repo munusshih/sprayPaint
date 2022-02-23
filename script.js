@@ -1,6 +1,7 @@
 let walker;
 let c;
 let sprayX;
+let dwell;
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -12,8 +13,15 @@ function setup() {
 }
 
 function draw() {
-  walker.bounce();
-  walker.draw();
+  if (pmouseX != mouseX || pmouseY != pmouseY) {
+    dwell = millis();
+    background(255, 255, 255, 80);
+  } else if ((millis() - dwell) < 5000) {
+    background(255, 255, 255, 80);
+  } else {
+    walker.bounce();
+    walker.draw();
+  }
 }
 
 class Walker {
